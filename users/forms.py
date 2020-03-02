@@ -5,6 +5,8 @@ from .models import AdtaaUser
 
 
 class AdtaaUserForm(UserCreationForm):
+    #email = forms.EmailField()
+
     class Meta:
         model = AdtaaUser
         fields = [
