@@ -1,4 +1,4 @@
-# Corey Schafer's django tutorial app
+# Coffee Lovers ADTAA app
 
 using this to practice working with django for webstack
 
