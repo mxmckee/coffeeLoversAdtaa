@@ -14,19 +14,7 @@ copy and past json
 code -> reformat code  
 //will make JSON pretty
 
-
-superuser  
-clarkSmith  
-clarklander1983@gmail.com  
-ilovehoteps  
-
-testUser  
-testme123 
-
-KingSolomon  
-wisdomihasit  
-
-python manage.py makemigrations  
+python manage.py makemigrations appname     
 //will create a file in my_app/migrations directory  
 
 python manage.py migrate  
