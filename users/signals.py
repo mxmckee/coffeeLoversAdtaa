@@ -12,14 +12,14 @@ def create_profile(sender, instance, created, **kwargs):
 def save_profile(sender, instance, **kwargs):
     instance.profile.save()
 
-@receiver(post_save, sender=AdtaaUser)
-def send_email_to_root(sender, instance, created, **kwargs):
-    if created:
-        send_mail(
-            'User {} has been created'.format(instance.username),
-            'A new user has been created.  Access requested: {}'.format(instance.accessRequested),
-            'clarklander1983@gmail.com',
-            ['clarklander1983@gmail.com'],
-            fail_silently=False,
-
-        )
+# @receiver(post_save, sender=AdtaaUser)
+# def send_email_to_root(sender, instance, created, **kwargs):
+#     if created:
+#         send_mail(
+#             'User {} has been created'.format(instance.username),
+#             'A new user has been created.  Access requested: {}'.format(instance.accessRequested),
+#             'clarklander1983@gmail.com',
+#             ['clarklander1983@gmail.com'],
+#             fail_silently=False,
+#
+#         )
