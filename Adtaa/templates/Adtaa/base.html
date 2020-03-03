@@ -54,9 +54,10 @@
                 <!--{% if user.is_authenticated %}-->
                     <ul class="list-group">
                         {% if user.is_staff %}
-                            <li class="list-group-item list-group-item-light bg-dark text-light"><a href="{% url 'admin:index' %}">Admin Page</a></li>
+                            <li class="list-group-item list-group-item-light bg-dark text-light"><a href="{% url 'admin:index' %}">Registration Queue</a></li>
+                            <li class="list-group-item list-group-item-light bg-dark text-light">Setup</li>
                         {% endif %}
-                        <li class="list-group-item list-group-item-light bg-dark text-light">Setup</li>
+
                         <li class="list-group-item list-group-item-light bg-dark text-light">Scheduling</li>
                         <li class="list-group-item list-group-item-light bg-dark text-light">Edit/View Schedule(s)</li>
                         <li class="list-group-item list-group-item-light bg-dark text-light"><a href="{% url 'profile' %}">Profile Settings</a></li>

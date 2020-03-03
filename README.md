@@ -1,6 +1,6 @@
 # Coffee Lovers ADTAA app
 
-using this to practice working with django for webstack
+work in progress for UALR Capstone 4392
 
 ### django
 ctrl-alt-i  
