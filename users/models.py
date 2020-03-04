@@ -16,9 +16,9 @@ class AdtaaUser(AbstractUser):
         blank=True,
     )
 
-    # is_active = models.BooleanField(
-    #     default=False
-    # )
+    is_active = models.BooleanField(
+        default=False
+    )
 
 class Profile(models.Model):
     user = models.OneToOneField(AdtaaUser, on_delete=models.CASCADE)
