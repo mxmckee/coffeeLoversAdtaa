@@ -19,6 +19,7 @@ class AdtaaUserForm(UserCreationForm):
 class AdtaaAuthenticationForm(AuthenticationForm):
     error_messages = {
         'inactive': _('This account has not been activated yet.  You will receive an email when activated.'),
+        'invalid_login': _('Not a valid username/password combination'),
     }
 
     def clean(self):
