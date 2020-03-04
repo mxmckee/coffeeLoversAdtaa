@@ -13,6 +13,7 @@ def create_profile(sender, instance, created, **kwargs):
 def save_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+
 @receiver(post_save, sender=AdtaaUser)
 def send_email_to_root(sender, instance, created, **kwargs):
     if created:
@@ -34,3 +35,4 @@ def active(sender, instance, **kwargs):
         from_email = 'clarklander1983@gmail.com'
         to_email = [instance.email]
         send_mail(subject,message,from_email,to_email,fail_silently=False)
+
