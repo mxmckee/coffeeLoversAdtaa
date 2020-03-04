@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import AdtaaUser
-from .forms import AdtaaUserForm
+from .forms import AdtaaUserForm, AdtaaAuthenticationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
 
 def register(request):
     if request.method == 'POST':
@@ -20,4 +21,7 @@ def register(request):
 @login_required()
 def profile(request):
     return render(request, 'users/profile.html')
+
+class AdtaaLoginView(LoginView):
+    authentication_form = AdtaaAuthenticationForm
 
