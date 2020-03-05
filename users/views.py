@@ -9,7 +9,9 @@ def register(request):
     if request.method == 'POST':
         form=AdtaaUserForm(request.POST)
         if form.is_valid():
-            form.save()
+            user=form.save()
+            user.is_active=False
+            user.save()
             username=form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}!')
             return redirect('login')
