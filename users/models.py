@@ -17,7 +17,7 @@ class AdtaaUser(AbstractUser):
     )
 
     is_active = models.BooleanField(
-        default=False
+        default=True
     )
 
 class Profile(models.Model):
