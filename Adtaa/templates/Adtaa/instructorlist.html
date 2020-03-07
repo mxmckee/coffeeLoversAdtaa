@@ -1,0 +1,29 @@
+{% extends "Adtaa/base.html" %}
+{% block content %}
+    <h4 class="text-center">Instructor Setup</h4>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Courses</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for instructor in instructors %}
+                <tr>
+                    <td>{{ instructor.firstName }}</td>
+                    <td>{{ instructor.lastName }}</td>
+                    <td>{{ instructor.maxClassLoad }}</td>
+                    <td><a class="btn btn-secondary" href="{% url 'instructor-update' instructor.id %}" role="button">Edit</a></td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{#    <div class="btn-group">#}
+        <a class="btn btn-outline-secondary mt-3 pull-left" href="{% url 'index' %}" role="button">Back</a>
+        <a class="btn btn-primary mt-3 pull-right" href="{% url 'instructor-add' %}" role="button">Add</a>
+{#    </div>#}
+{% endblock content %}

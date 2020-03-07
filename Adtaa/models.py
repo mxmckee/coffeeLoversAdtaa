@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 class Instructor(models.Model):
     DISCIPLINE_CHOICES = (
@@ -46,6 +47,9 @@ class Instructor(models.Model):
         for choice in self.DISCIPLINE_CHOICES:
             if choice[0] == self.discipline2:
                 return choice[1]
+
+    def get_absolute_url(self):
+        return reverse('instructorlist')
 
 class Course(models.Model):
     DISCIPLINE_CHOICES=(
@@ -120,4 +124,7 @@ class Course(models.Model):
         for choice in self.TIMES_CHOICES:
             if choice[0] == self.courseTime:
                 return choice[1]
+
+    def get_absolute_url(self):
+        return reverse('courselist')
 

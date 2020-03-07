@@ -56,7 +56,7 @@
                         {% if user.is_staff %}
                             <li class="list-group-item list-group-item-light bg-dark text-light"><a href="{% url 'userlist' %}">Registration Queue</a></li>
                             <li class="list-group-item list-group-item-light bg-dark text-light"><a href="{% url 'courselist' %}">Course Setup</a></li>
-                            <li class="list-group-item list-group-item-light bg-dark text-light">Instructor Setup</li>
+                            <li class="list-group-item list-group-item-light bg-dark text-light"><a href="{% url 'instructorlist' %}">Instructor Setup</a></li>
                         {% endif %}
 
                         <li class="list-group-item list-group-item-light bg-dark text-light">Scheduling</li>

@@ -5,11 +5,12 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Add Course</legend>
+                <legend class="border-bottom mb-4">Add Instructor</legend>
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">Save</button>
+                <a class="btn btn-danger" href="{% url 'instructor-delete' object.id %}">Delete</a>
             </div>
 
         </form>

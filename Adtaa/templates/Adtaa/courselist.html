@@ -19,7 +19,7 @@
                     <td>{{ course.courseTitle }}</td>
                     <td>{{ course.courseDays }}</td>
                     <td>{{ course.returnReadableTime }}</td>
-{#                    <td><a class="btn btn-outline-secondary" href="{% url 'user-detail' user.id %}" role="button">Details</a></td>#}
+                    <td><a class="btn btn-secondary" href="{% url 'course-update' course.id %}" role="button">Edit</a></td>
                 </tr>
         {% endfor %}
         </tbody>
