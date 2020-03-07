@@ -1,14 +1,11 @@
 {% extends "users/base.html" %}
 {% block content %}
-    <ul>
+    <h4>Registration Requests</h4>
+    <div class="list-group">
         {% for user in users %}
-            {% if not user.is_superuser %}
-                <li>
+            {% if not user.is_superuser and not user.is_active %}
 
-
-
-                    <article class="media content-section">
-                        <h6><a class="article-title" href="{% url 'user-detail' user.id %}">{{ user.username }}</a></h6>
+                        <a class="list-group-item list-group-item-action" href="{% url 'user-detail' user.id %}">{{ user.username }}</a>
                         {#                <img class="rounded-circle article-img" src="{{ user.profile.image.url }}">#}
                         {#                <div class="media-body">#}
                         {#                    <div class="article-metadata">#}
@@ -21,10 +18,9 @@
                         {#                    <p class="article-content">Access Requested: {{ user.returnUserRequested }}</p>#}
                         {#                    <p class="article-content">{{ user.is_active }}</p>#}
                         {#                </div>#}
-                    </article>
 
-                </li>
             {% endif %}
         {% endfor %}
-    </ul>
+    </div>
+    <a class="btn btn-outline-secondary mt-3" href="{% url 'index' %}" role="button">Back</a>
 {% endblock content %}
