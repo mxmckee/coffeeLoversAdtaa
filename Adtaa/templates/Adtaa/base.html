@@ -17,7 +17,7 @@
 
 </head>
 <body>
-    <header class="site-header">
+    <header class="site-header" id="top">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
             <div class="container">
                 <a class="navbar-brand mr-4" href="{% url 'index' %}">ADTAA</a>
@@ -54,7 +54,7 @@
                 <!--{% if user.is_authenticated %}-->
                     <ul class="list-group">
                         {% if user.is_staff %}
-                            <li class="list-group-item list-group-item-light bg-dark text-light"><a href="{% url 'admin:index' %}">Registration Queue</a></li>
+                            <li class="list-group-item list-group-item-light bg-dark text-light"><a href="{% url 'userlist' %}">Registration Queue</a></li>
                             <li class="list-group-item list-group-item-light bg-dark text-light">Setup</li>
                         {% endif %}
 
@@ -87,6 +87,13 @@
 
         </div>
     </main>
+
+    <div class="container">
+        <div id="footer">
+            <h6>&copy; 2020 CoffeeLovers | <a href="#top">Back to top</a></h6>
+        </div> <!--footer-->
+
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

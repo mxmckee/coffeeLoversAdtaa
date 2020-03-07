@@ -1,0 +1,30 @@
+{% extends "users/base.html" %}
+{% block content %}
+    <ul>
+        {% for user in users %}
+            {% if not user.is_superuser %}
+                <li>
+
+
+
+                    <article class="media content-section">
+                        <h6><a class="article-title" href="{% url 'user-detail' user.id %}">{{ user.username }}</a></h6>
+                        {#                <img class="rounded-circle article-img" src="{{ user.profile.image.url }}">#}
+                        {#                <div class="media-body">#}
+                        {#                    <div class="article-metadata">#}
+                        {##}
+                        {#                        <small class="text-muted">{{ user.date_joined|date:"F d, Y" }}</small>#}
+                        {#                    </div>#}
+                        {##}
+                        {#                    <h2>{{ user.username }}</h2>#}
+                        {#                    <p class="article-content">{{ user.email }}</p>#}
+                        {#                    <p class="article-content">Access Requested: {{ user.returnUserRequested }}</p>#}
+                        {#                    <p class="article-content">{{ user.is_active }}</p>#}
+                        {#                </div>#}
+                    </article>
+
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock content %}

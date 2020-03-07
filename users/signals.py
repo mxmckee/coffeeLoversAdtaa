@@ -19,7 +19,7 @@ def send_email_to_root(sender, instance, created, **kwargs):
     if created:
         send_mail(
             'User {} has been created'.format(instance.username),
-            'A new user has been created.  Access requested: {}'.format(instance.accessRequested),
+            'A new user has been created.  Access requested: {}'.format(instance.returnUserRequested()),
             'coffeeloversusa2020@gmail.com',
             ['coffeeloversusa2020@gmail.com'],
             fail_silently=False,
