@@ -35,6 +35,12 @@ class AdtaaUser(AbstractUser):
         else:
             return 'No'
 
+    def userAdminYesNo(self):
+        if self.is_staff:
+            return 'Yes'
+        else:
+            return 'No'
+
 
 class Profile(models.Model):
     user = models.OneToOneField(AdtaaUser, on_delete=models.CASCADE)

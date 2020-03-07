@@ -1,4 +1,4 @@
-{% extends "users/base.html" %}
+{% extends "Adtaa/base.html" %}
 {% block content %}
 
     <article class="media content-section">
@@ -13,10 +13,12 @@
             <p class="article-content">{{ object.email }}</p>
             <p class="article-content">Access Level Requested: {{ object.returnUserRequested }}</p>
             <p class="article-content">Active: {{ object.userActiveYesNo }}</p>
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'user-update' object.id %}">Update</a>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'user-update' object.id %}">Edit</a>
+
         </div>
 
+
     </article>
-    <a class="btn btn-outline-secondary mt-1" href="{% url 'userlist' %}" role="button">Back</a>
+<a class="btn btn-outline-secondary mt-1" href="{% url 'userlist' %}" role="button">Back</a>
 
 {% endblock content %}
