@@ -127,7 +127,26 @@ class Course(models.Model):
     def get_absolute_url(self):
         return reverse('courselist')
 
-class ScheduledCourse(Course):
+class ScheduledCourse(models.Model):
+    DAYS_CHOICES=(
+        ('MW', 'MW'),
+        ('TR', 'TR'),
+    )
+
+    TIMES_CHOICES=(
+        (1, '08:00 AM - 09:15 AM'),
+        (2, '09:25 AM - 10:40 AM'),
+        (3, '10:50 AM - 12:05 PM'),
+        (4, '12:15 PM - 01:30 PM'),
+        (5, '01:40 PM - 02:55 PM'),
+        (6, '03:05 PM - 04:20 PM'),
+        (7, '04:30 PM - 05:45 PM'),
+    )
+
+    courseNumber = models.CharField(max_length=15)
+    courseTitle = models.CharField(max_length=50)
+    courseDays = models.CharField(max_length=2, choices=DAYS_CHOICES, default='')
+    courseTime = models.IntegerField(choices=TIMES_CHOICES, default=0)
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE, null=True, blank=True)
     scheduleNumber = models.IntegerField(default=0)
 
