@@ -88,7 +88,6 @@ class Course(models.Model):
     courseTitle = models.CharField(max_length=50)
     courseDays = models.CharField(max_length=2, choices=DAYS_CHOICES, default='')
     courseTime = models.IntegerField(choices=TIMES_CHOICES, default=0)
-    instructor=models.ForeignKey(Instructor, on_delete=models.CASCADE, null=True, blank=True)
     discipline1 = models.CharField(
         max_length=2,
         choices=DISCIPLINE_CHOICES,
@@ -127,4 +126,8 @@ class Course(models.Model):
 
     def get_absolute_url(self):
         return reverse('courselist')
+
+class ScheduledCourse(Course):
+    instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE, null=True, blank=True)
+
 

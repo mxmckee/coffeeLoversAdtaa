@@ -17,4 +17,5 @@ urlpatterns = [
     path('instructorlist/', Adtaa_views.InstructorListView.as_view(template_name='Adtaa/instructorlist.html'), name='instructorlist'),
     path('instructor/<int:pk>/update', Adtaa_views.InstructorUpdateView.as_view(template_name='Adtaa/instructor_update_form.html'), name='instructor-update'),
     path('instructor/<int:pk>/delete', Adtaa_views.InstructorDeleteView.as_view(template_name='Adtaa/instructor_confirm_delete.html'), name='instructor-delete'),
+    path('schedule/', Adtaa_views.schedule, name='schedule'),
 ]
