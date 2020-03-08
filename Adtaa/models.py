@@ -150,3 +150,6 @@ class ScheduledCourse(models.Model):
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE, null=True, blank=True)
     scheduleNumber = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.courseTitle
+

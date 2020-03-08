@@ -27,7 +27,7 @@ def schedule(request):
         return redirect('index')
 
 
-    # ScheduledCourse.objects.all().delete()
+    ScheduledCourse.objects.all().delete()
     autosolutions = coffeeFx.main()
     context = {'autosolutions': autosolutions}
     for i in range(len(autosolutions)):
