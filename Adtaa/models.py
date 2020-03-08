@@ -129,5 +129,5 @@ class Course(models.Model):
 
 class ScheduledCourse(Course):
     instructor = models.ForeignKey(Instructor, on_delete=models.CASCADE, null=True, blank=True)
-
+    scheduleNumber = models.IntegerField(default=0)
 
