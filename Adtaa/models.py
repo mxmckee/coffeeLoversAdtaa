@@ -153,3 +153,10 @@ class ScheduledCourse(models.Model):
     def __str__(self):
         return self.courseTitle
 
+    def returnReadableTime(self):
+        for choice in self.TIMES_CHOICES:
+            if choice[0] == self.courseTime:
+                return choice[1]
+
+    def get_absolute_url(self):
+        return reverse('schedcourselist')

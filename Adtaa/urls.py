@@ -9,6 +9,9 @@ from .import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('pdf/', Adtaa_views.generatePDF_view, name='pdf'),
+    path('schedcourselist/', Adtaa_views.SchedCourseListView.as_view(template_name='Adtaa/sched_courselist.html'), name='schedcourselist'),
+    path('schedcourse/<int:pk>/update', Adtaa_views.SchedCourseUpdateView.as_view(template_name='Adtaa/sched_course_update_form.html'), name='sched-course-update'),
     path('courselist/', Adtaa_views.CourseListView.as_view(template_name='Adtaa/courselist.html'), name='courselist'),
     path('courseadd/', Adtaa_views.CourseAddView.as_view(template_name='Adtaa/course_form.html'), name='course-add'),
     path('course/<int:pk>/update', Adtaa_views.CourseUpdateView.as_view(template_name='Adtaa/course_update_form.html'), name='course-update'),

@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -6,6 +7,10 @@ from django.views.generic import ListView, DetailView, UpdateView, CreateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Course, Instructor, ScheduledCourse
 from Adtaa import auto_solutions_generator as coffeeFx
+from django.template.loader import get_template
+from io import BytesIO
+from xhtml2pdf import pisa
+from .utils import render_to_pdf
 
 #this is the views page for the adtaa
 
@@ -76,3 +81,23 @@ class InstructorUpdateView(LoginRequiredMixin, UpdateView):
 class InstructorDeleteView(LoginRequiredMixin, DeleteView):
     model=Instructor
     success_url = '/instructorlist'
+
+
+class SchedCourseListView(ListView):
+    model = ScheduledCourse
+    context_object_name = 'courses'
+
+class SchedCourseUpdateView(LoginRequiredMixin, UpdateView):
+    model = ScheduledCourse
+    fields = ['courseNumber', 'courseTitle', 'courseDays', 'courseTime', 'instructor']
+
+def generatePDF_view(request, *args, **kwargs):
+    template=get_template('Adtaa/printed_schedule.html')
+    coursesQuerySet = ScheduledCourse.objects.all()
+    courses = coursesQuerySet[::1]
+    context = {
+        'scheduledcourses':courses
+    }
+    html=template.render(context)
+    pdf = render_to_pdf('Adtaa/printed_schedule.html', context)
+    return HttpResponse(pdf, content_type='application/pdf')
