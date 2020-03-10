@@ -29,7 +29,7 @@ def schedule(request):
         ScheduledCourse.objects.all().delete()
         for course in coursesToSave:
             course.save()
-        return redirect('index')
+        return redirect('schedcourselist')
 
 
     ScheduledCourse.objects.all().delete()
