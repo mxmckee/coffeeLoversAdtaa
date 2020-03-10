@@ -99,5 +99,6 @@ def generatePDF_view(request, *args, **kwargs):
         'scheduledcourses':courses
     }
     html=template.render(context)
+    # pdf = render_to_pdf('Adtaa/printed_schedule.html', context)
     pdf = render_to_pdf('Adtaa/printed_schedule.html', context)
     return HttpResponse(pdf, content_type='application/pdf')

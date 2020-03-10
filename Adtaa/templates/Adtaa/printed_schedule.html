@@ -1,9 +1,39 @@
-{% extends "users/base.html" %}
-{% block content %}
-    <h4 class="text-center">Schedule</h4>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>PDF Schedule</title>
+    <style type="text/css">
+        body {
+            font-weight: 200;
+            font-size: 14px;
+        }
+        h4 {
+            font-size: 20px;
+            font-weight: 100;
+            text-align: center;
+
+        }
+
+        .row{
+            border-bottom: 1px solid black;
+        }
+
+        td {
+            padding-top: 4px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <h4>Schedule</h4>
     <table class="table table-hover">
         <thead>
-            <tr>
+            <tr class="row">
 
 
                 <th scope="col">Title</th>
@@ -16,7 +46,7 @@
         <tbody>
 
         {% for course in scheduledcourses %}
-                <tr>
+                <tr class="row">
 
                     <td>{{ course.courseTitle }}</td>
                     <td>{{ course.courseDays }}</td>
@@ -28,4 +58,5 @@
         </tbody>
     </table>
 
-{% endblock content %}
+</body>
+</html>
