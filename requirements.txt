@@ -1,0 +1,4 @@
+django-crispy-forms
+xhtml2pdf
+gunicorn
+pillow
