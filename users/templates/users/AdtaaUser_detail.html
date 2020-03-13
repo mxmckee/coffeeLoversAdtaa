@@ -1,0 +1,24 @@
+{% extends "Adtaa/base.html" %}
+{% block content %}
+
+    <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ object.profile.image.url }}">
+        <div class="media-body">
+            <div class="article-metadata">
+
+                <small class="text-muted">Date Created: {{ object.date_joined|date:"F d, Y" }}</small>
+            </div>
+
+            <h2>{{ object.username }}</h2>
+            <p class="article-content">{{ object.email }}</p>
+            <p class="article-content">Access Level Requested: {{ object.returnUserRequested }}</p>
+            <p class="article-content">Active: {{ object.userActiveYesNo }}</p>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'user-update' object.id %}">Edit</a>
+
+        </div>
+
+
+    </article>
+<a class="btn btn-outline-secondary mt-1" href="{% url 'userlist' %}" role="button">Back</a>
+
+{% endblock content %}

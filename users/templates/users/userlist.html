@@ -1,0 +1,31 @@
+{% extends "Adtaa/base.html" %}
+{% block content %}
+    <h4 class="text-center">Registration</h4>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Active</th>
+                <th scope="col">Admin</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            {% if not user.is_superuser and not user.is_active %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.userActiveYesNo }}</td>
+                    <td>{{ user.userAdminYesNo }}</td>
+                    <td><a class="btn btn-outline-secondary" href="{% url 'user-detail' user.id %}" role="button">Details</a></td>
+
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-outline-secondary mt-3" href="{% url 'index' %}" role="button">Back</a>
+{% endblock content %}

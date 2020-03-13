@@ -38,8 +38,14 @@ urlpatterns = [
     path('password-reset-complete/',
          auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),
          name='password_reset_complete'),
+    path('userlist/', user_views.UserListView.as_view(template_name='users/userlist.html'), name='userlist'),
+    path('user/<int:pk>/', user_views.UserDetailView.as_view(template_name='users/AdtaaUser_detail.html'), name='user-detail'),
+    path('user/<int:pk>/update/', user_views.UserUpdateView.as_view(template_name='users/user_form.html'), name='user-update'),
+
     path('', include('Adtaa.urls')),
+
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

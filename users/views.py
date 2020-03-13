@@ -4,6 +4,8 @@ from .forms import AdtaaUserForm, AdtaaAuthenticationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
+from django.views.generic import ListView, DetailView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def register(request):
     if request.method == 'POST':
@@ -27,3 +29,14 @@ def profile(request):
 class AdtaaLoginView(LoginView):
     authentication_form = AdtaaAuthenticationForm
 
+class UserListView(ListView):
+    model = AdtaaUser
+    context_object_name = 'users'
+    ordering = ['-date_joined']
+
+class UserDetailView(DetailView):
+    model = AdtaaUser
+
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    model = AdtaaUser
+    fields = ['is_active', 'is_staff', 'is_superuser']
