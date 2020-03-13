@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.views.generic import ListView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 def register(request):
     if request.method == 'POST':
@@ -21,6 +23,23 @@ def register(request):
         form = AdtaaUserForm()
 
     return render(request, 'users/register.html', {'form':form})
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+
+            return redirect('profile')
+        else:
+            return redirect('changepassword')
+
+    else:
+        form = PasswordChangeForm(user=request.user)
+        return render(request, 'users/passwordchange.html', {'form':form})
+
 
 @login_required()
 def profile(request):
