@@ -34,13 +34,24 @@ def schedule(request):
 
     ScheduledCourse.objects.all().delete()
     autosolutions = coffeeFx.main()
-    context = {'autosolutions': autosolutions}
+
     for i in range(len(autosolutions)):
         for j in range(len(autosolutions[i])):
             tempCourse = ScheduledCourse(courseNumber=autosolutions[i][j][0].courseNumber, courseTitle=autosolutions[i][j][0].courseTitle, \
                                          courseDays=autosolutions[i][j][0].courseDays, courseTime=autosolutions[i][j][0].courseTime, \
                                          instructor=autosolutions[i][j][1], scheduleNumber=i+1)
             tempCourse.save()
+
+    outerList=[]
+    for solution in autosolutions:
+        middleList=[]
+        for course in solution:
+            innerList=[course[0].courseNumber, course[0].courseTitle, course[0].courseDays, course[0].returnReadableTime(), course[1].lastName]
+            middleList.append(innerList)
+        outerList.append(middleList)
+    autosolutions=outerList
+    context = {'autosolutions': autosolutions}
+
 
 
 
