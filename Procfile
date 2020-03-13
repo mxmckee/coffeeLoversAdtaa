@@ -1,1 +1,1 @@
-web: gunicorn Adtaa.wsgi
+web: gunicorn coffeeLoversAdtaa.wsgi
