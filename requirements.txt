@@ -1,4 +1,5 @@
 django-crispy-forms
 xhtml2pdf
-gunicorn
 pillow
+gunicorn
+django-heroku

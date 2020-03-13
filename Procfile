@@ -1,2 +1,1 @@
-web: gunicorn Adtaa:app
-
+web: gunicorn Adtaa.wsgi
