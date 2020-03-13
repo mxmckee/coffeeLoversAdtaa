@@ -1,0 +1,5 @@
+django-crispy-forms
+xhtml2pdf
+pillow
+gunicorn
+django-heroku
