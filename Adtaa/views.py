@@ -1,3 +1,4 @@
+#this module is largely created following Corey Schafer's tutorial: https://www.youtube.com/playlist?list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
