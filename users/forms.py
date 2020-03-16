@@ -8,6 +8,9 @@ from django.utils.translation import gettext_lazy as _
 
 class AdtaaUserForm(UserCreationForm):
     #email = forms.EmailField()
+    error_messages = {
+        'inactive': _('This account has not been activated yet.  You will receive an email when activated.'),
+    }
 
     class Meta:
         model = AdtaaUser
