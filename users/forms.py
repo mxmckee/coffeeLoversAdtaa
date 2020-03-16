@@ -12,6 +12,13 @@ class AdtaaUserForm(UserCreationForm):
         'inactive': _('This account has not been activated yet.  You will receive an email when activated.'),
     }
 
+    def confirm_login_allowed(self, user):
+        if not user.is_active:
+            raise forms.ValidationError(
+                self.error_messages['inactive'],
+                code='inactive',
+            )
+
     class Meta:
         model = AdtaaUser
         fields = [
