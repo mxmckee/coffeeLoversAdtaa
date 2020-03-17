@@ -2,7 +2,6 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.forms import User
 from .models import AdtaaUser
 from django.utils.translation import gettext_lazy as _
 
@@ -16,27 +15,19 @@ class AdtaaUserForm(UserCreationForm):
         fields = [
             'email', 'username', 'password1', 'password2', 'accessRequested'
         ]
+        error_messages = {
+            'username': {
+                'unique': 'A user with this username already exists'
+            }
+        }
 
-def clean_email(self):
-    email = self.cleaned_data.get['email']
-    try:
-        match = AdtaaUser.objects.get(email=email)
-    except AdtaaUser.DoesNotExist:
-        return email
-    raise forms.ValidationError('Username "%s" is already in use. Testing' % username)
-
-    def save(self, commit=True):
-        user = super(AdtaaUserForm, self).save(commit=False)
-        user.email = cleaned_data['email']
-        user.accessRequested = cleaned_data['accessRequested']
-
-        if commit:
-            user.save()
-
-        return user
-
-
-
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        username = self.cleaned_data.get('username')
+        if email and AdtaaUser.objects.filter(email=email):
+            raise forms.ValidationError('A user with this email already exists.')
+        elif username and AdtaaUser.objects.filter(username=username):
+            raise forms.ValidationError('A user with this username already exists')
 
 
 class AdtaaAuthenticationForm(AuthenticationForm):
