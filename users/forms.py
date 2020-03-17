@@ -2,28 +2,41 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import User
 from .models import AdtaaUser
 from django.utils.translation import gettext_lazy as _
 
 
 class AdtaaUserForm(UserCreationForm):
     #email = forms.EmailField()
-    error_messages = {
-        'inactive': _('This account has not been activated yet.  You will receive an email when activated.'),
-    }
-
-    def confirm_login_allowed(self, user):
-        if not user.is_active:
-            raise forms.ValidationError(
-                self.error_messages['inactive'],
-                code='inactive',
-            )
+    email = forms.EmailField(required=True)
 
     class Meta:
         model = AdtaaUser
         fields = [
             'email', 'username', 'password1', 'password2', 'accessRequested'
         ]
+
+def clean_email(self):
+    email = self.cleaned_data.get['email']
+    try:
+        match = AdtaaUser.objects.get(email=email)
+    except AdtaaUser.DoesNotExist:
+        return email
+    raise forms.ValidationError('Username "%s" is already in use. Testing' % username)
+
+    def save(self, commit=True):
+        user = super(AdtaaUserForm, self).save(commit=False)
+        user.email = cleaned_data['email']
+        user.accessRequested = cleaned_data['accessRequested']
+
+        if commit:
+            user.save()
+
+        return user
+
+
+
 
 
 class AdtaaAuthenticationForm(AuthenticationForm):
