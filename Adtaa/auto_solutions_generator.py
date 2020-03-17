@@ -137,7 +137,6 @@ def get_auto_solutions(instructor_combinations, courses, scheduled_courses):
                         solution[j][0].courseTime and solution[i][1].lastName == solution[j][1].lastName:
                     invalid_auto_solutions.append(solution)
                     break
-            break
 
     valid_auto_solutions = [x for x in all_auto_solutions if x not in invalid_auto_solutions]
 
