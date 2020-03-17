@@ -17,7 +17,7 @@ def register(request):
             user.is_active=False
             user.save()
             username=form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}!')
+            messages.success(request, f'Registration request sent to Admin. You will receive an email once your account has been approved')
             return redirect('login')
     else:
         form = AdtaaUserForm()
