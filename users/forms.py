@@ -15,11 +15,6 @@ class AdtaaUserForm(UserCreationForm):
         fields = [
             'email', 'username', 'password1', 'password2', 'accessRequested'
         ]
-        error_messages = {
-            'username': {
-                'unique': 'A user with this username already exists'
-            }
-        }
 
     def clean(self):
         email = self.cleaned_data.get('email')
