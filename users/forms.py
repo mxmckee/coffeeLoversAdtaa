@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 class AdtaaUserForm(UserCreationForm):
     #email = forms.EmailField()
+    email = forms.EmailField(required=True)
 
     class Meta:
         model = AdtaaUser
@@ -15,6 +16,13 @@ class AdtaaUserForm(UserCreationForm):
             'email', 'username', 'password1', 'password2', 'accessRequested'
         ]
 
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        username = self.cleaned_data.get('username')
+        if email and AdtaaUser.objects.filter(email=email):
+            raise forms.ValidationError('A user with this email already exists.')
+        elif username and AdtaaUser.objects.filter(username=username):
+            raise forms.ValidationError('A user with this username already exists')
 
 class AdtaaAuthenticationForm(AuthenticationForm):
     error_messages = {
