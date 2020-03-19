@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-import django_heroku
+#import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,9 +26,9 @@ SECRET_KEY = 's41z2z6jen_nlq4^vniobj1lxzj3ke7s38zx$-x0kue-%x95j+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.24.140']
 
-
+SITE_ID=1
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,7 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'allauth',
+    'invitations',
+    'django.contrib.sites',
 ]
+
+ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -148,4 +153,4 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
