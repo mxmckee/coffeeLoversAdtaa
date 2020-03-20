@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
 from invitations.utils import get_invitation_model
+from invitations.models import Invitation
 
 class AdtaaUser(AbstractUser):
     ACCESS_CHOICES=(
