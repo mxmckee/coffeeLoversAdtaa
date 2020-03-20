@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import AdtaaUser
-from .forms import AdtaaUserForm, AdtaaAuthenticationForm
+from .forms import AdtaaUserForm, AdtaaAuthenticationForm, AdtaaRootUserForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
@@ -24,6 +24,23 @@ def register(request):
 
     return render(request, 'users/register.html', {'form':form})
 
+def root_register(request):
+    if request.method == 'POST':
+        form=AdtaaRootUserForm(request.POST)
+        if form.is_valid():
+            user=form.save()
+            user.is_active=True
+            user.is_staff=True
+            user.is_superuser=True
+            user.save()
+            username=form.cleaned_data.get('username')
+            messages.success(request, f'Welcome new root user!')
+            return redirect('login')
+    else:
+        form = AdtaaRootUserForm()
+
+    return render(request, 'users/account_signup.html', {'form':form})
+
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)
@@ -39,7 +56,6 @@ def change_password(request):
     else:
         form = PasswordChangeForm(user=request.user)
         return render(request, 'users/passwordchange.html', {'form':form})
-
 
 @login_required()
 def profile(request):

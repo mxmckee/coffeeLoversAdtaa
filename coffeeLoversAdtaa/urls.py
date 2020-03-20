@@ -19,6 +19,8 @@ from users import views as user_views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import url
+from invitations import views as invitation_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -42,8 +44,11 @@ urlpatterns = [
     path('userlist/', user_views.UserListView.as_view(template_name='users/userlist.html'), name='userlist'),
     path('user/<int:pk>/', user_views.UserDetailView.as_view(template_name='users/AdtaaUser_detail.html'), name='user-detail'),
     path('user/<int:pk>/update/', user_views.UserUpdateView.as_view(template_name='users/user_form.html'), name='user-update'),
+    path('accept-invite/', user_views.root_register, name='account_signup'),
 
     path('', include('Adtaa.urls')),
+
+    url('', include('invitations.urls', namespace='invitations')),
 
 ]
 
