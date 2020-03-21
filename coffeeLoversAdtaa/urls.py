@@ -45,10 +45,13 @@ urlpatterns = [
     path('user/<int:pk>/', user_views.UserDetailView.as_view(template_name='users/AdtaaUser_detail.html'), name='user-detail'),
     path('user/<int:pk>/update/', user_views.UserUpdateView.as_view(template_name='users/user_form.html'), name='user-update'),
     path('accept-invite/', user_views.root_register, name='account_signup'),
+    path('user/rootinvite/', user_views.RootInvite, name='rootinvite'),
+    #path('user/rootinvitechange/', user_views.RootInviteChange, name='rootinvitechange'),
+
 
     path('', include('Adtaa.urls')),
 
-    url('', include('invitations.urls', namespace='invitations')),
+    url(r'^invitations/', include('invitations.urls', namespace='invitations')),
 
 ]
 

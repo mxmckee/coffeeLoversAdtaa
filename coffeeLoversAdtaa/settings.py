@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 ]
 
-ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
+ACCOUNT_ADAPTER = 'invitations.adapters.BaseInvitationsAdapter'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
