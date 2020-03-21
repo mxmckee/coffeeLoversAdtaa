@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import AdtaaUser
 from invitations.views import SendInvite
-from invitations.forms import InvitationAdminAddForm, InvitationAdminChangeForm
+from invitations.forms import InvitationAdminAddForm, InvitationAdminChangeForm, InviteForm
 from .forms import AdtaaUserForm, AdtaaAuthenticationForm, AdtaaRootUserForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -10,6 +10,9 @@ from django.views.generic import ListView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from invitations.utils import get_invitation_model
+
+RootInvitation = get_invitation_model()
 
 def register(request):
     if request.method == 'POST':
@@ -47,7 +50,14 @@ def RootInvite(request):
     if request.method == 'POST':
         form=InvitationAdminAddForm(request.POST)
         if form.is_valid():
-            username=form.cleaned_data.get('username')
+            email = form.cleaned_data.get("email")
+            params = {'email': email}
+            if form.cleaned_data.get("inviter"):
+                params['inviter'] = form.cleaned_data.get("inviter")
+            invite = RootInvitation.create(**params, inviter=request.user)
+            invite.send_invitation(request)
+            #user=form.save(self, *args, **kwargs)
+            #user.save()
             messages.success(request, f'Invite sent!')
             return redirect('rootinvite')
     else:
@@ -90,6 +100,9 @@ def profile(request):
 
 class AdtaaLoginView(LoginView):
     authentication_form = AdtaaAuthenticationForm
+
+#class RootInvite(SendInvite):
+#    model = AdtaaUser
 
 class UserListView(ListView):
     model = AdtaaUser
