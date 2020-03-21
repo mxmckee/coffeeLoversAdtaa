@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import AdtaaUser
 from invitations.views import SendInvite
 from invitations.forms import InvitationAdminAddForm, InvitationAdminChangeForm, InviteForm
+from invitations.admin import InvitationAdmin
 from .forms import AdtaaUserForm, AdtaaAuthenticationForm, AdtaaRootUserForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -59,7 +60,7 @@ def RootInvite(request):
             #user=form.save(self, *args, **kwargs)
             #user.save()
             messages.success(request, f'Invite sent!')
-            return redirect('rootinvite')
+            return redirect('rootinviteview')
     else:
         form = InvitationAdminAddForm()
 
@@ -103,6 +104,11 @@ class AdtaaLoginView(LoginView):
 
 #class RootInvite(SendInvite):
 #    model = AdtaaUser
+
+class RootInviteView(ListView):
+    model = RootInvitation
+    context_object_name = 'emails'
+    ordering = ['-created']
 
 class UserListView(ListView):
     model = AdtaaUser
