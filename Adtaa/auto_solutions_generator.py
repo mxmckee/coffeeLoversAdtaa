@@ -153,7 +153,15 @@ def get_auto_solutions(instructor_combinations, courses, scheduled_courses):
         if len(solution) == max_schedule_length:
             auto_solutions_of_max_length.append(solution)
 
-    return auto_solutions_of_max_length
+    auto_solutions = []
+    for solution in auto_solutions_of_max_length:
+        assigned_courses = []
+        for assignment in solution:
+            assigned_courses.append(assignment[0])
+        unassigned_courses = [x for x in courses if x not in assigned_courses]
+        auto_solutions.append((solution, unassigned_courses))
+
+    return auto_solutions
 
 
 def main():

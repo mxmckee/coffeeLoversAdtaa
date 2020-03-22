@@ -80,7 +80,7 @@
                     {% endif %}
 
                     <h4 class="text-center">Possible Schedules</h4>
-    {% for solution in autosolutions %}
+    {% for solution, unassigned in autosolutions %}
         <div class="content-section">
         <form method="post">
         {% csrf_token %}
@@ -101,6 +101,25 @@
                         <td>{{ course.2 }}</td>
                         <td>{{ course.3 }}</td>
                         <td>{{ course.4 }}</td>
+
+
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Unassigned Courses</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for name in unassigned %}
+                    <tr>
+                        <td>{{ name }}</td>
 
 
                     </tr>
