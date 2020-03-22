@@ -16,12 +16,12 @@
                     <td>{{ email.email }}</td>
                     <td>{{ email.sent }}</td>
                     <td>{{ email.accepted }}</td>
-                    <td><a class="btn btn-outline-secondary" href="{% url 'user-detail' user.id %}" role="button">Details</a></td>
+                    <td><a class="btn btn-outline-secondary" href="{% url 'invite-detail' email.id %}" role="button">Edit</a></td>
 
                 </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a class="btn btn-outline-secondary mt-3" href="{% url 'index' %}" role="button">Back</a>
+    <a class="btn btn-outline-secondary mt-3" href="{% url 'profile' %}" role="button">Back</a>
 {% endblock content %}

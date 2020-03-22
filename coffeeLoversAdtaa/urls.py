@@ -47,7 +47,8 @@ urlpatterns = [
     path('accept-invite/', user_views.root_register, name='account_signup'),
     path('user/rootinvite/', user_views.RootInvite, name='rootinvite'),
     path('user/rootinviteview/', user_views.RootInviteView.as_view(template_name='users/rootinvitelist.html'), name='rootinviteview'),
-    #path('user/rootinvitechange/', user_views.RootInviteChange, name='rootinvitechange'),
+    path('user/rootinvitechange/', user_views.RootInviteChange, name='rootinvitechange'),
+    path('user/<int:pk>/rootinviteupdate', user_views.RootInviteDetail.as_view(template_name='users/root_invite_detail.html'), name='invite-detail'),
 
 
     path('', include('Adtaa.urls')),

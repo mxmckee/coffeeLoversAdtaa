@@ -11,9 +11,10 @@ from django.views.generic import ListView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
-from invitations.utils import get_invitation_model
+from invitations.utils import get_invitation_model, get_invitation_admin_change_form
 
 RootInvitation = get_invitation_model()
+InvitationAdminChangeForm = get_invitation_admin_change_form()
 
 def register(request):
     if request.method == 'POST':
@@ -70,14 +71,14 @@ def RootInviteChange(request):
     if request.method == 'POST':
         form=InvitationAdminChangeForm(request.POST)
         if form.is_valid():
-            #user=form.save()
-            #user.save()
+            user=form.save()
+            user.save()
             #messages.success(request, f'Invite sent!')
-            return redirect('profile')
+            return redirect('rootinviteview')
     else:
         form = InvitationAdminChangeForm()
 
-    return render(request, 'users/profile.html', {'form':form})
+    return render(request, 'users/root_invite_detail.html', {'form':form})
 
 def change_password(request):
     if request.method == 'POST':
@@ -109,6 +110,13 @@ class RootInviteView(ListView):
     model = RootInvitation
     context_object_name = 'emails'
     ordering = ['-created']
+
+class RootInviteDetail(LoginRequiredMixin, UpdateView):
+    model = RootInvitation
+    fields = '__all__'
+    template_name = "users/root_invite_detail.html"
+    #slug_field = 'url'
+    #slug_url_kwarg = 'url'
 
 class UserListView(ListView):
     model = AdtaaUser
