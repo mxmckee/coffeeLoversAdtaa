@@ -84,7 +84,7 @@
         <div class="content-section">
         <form method="post">
         {% csrf_token %}
-        <h6>Schedule #{{ forloop.counter }}</h6>
+        <h5>Schedule #{{ forloop.counter }}</h5>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -110,20 +110,15 @@
             </tbody>
 
         </table>
-
+        
         <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Unassigned Courses</th>
-                </tr>
-            </thead>
             <tbody>
+                <tr>
+                    <th scope="col">Unassigned Courses (if applicable)</th>
+                </tr>
+                
                 {% for course in unassigned %}
                     <tr>
-                        <!-- <td>{{ course.1 }}</td>
-                        <td>{{ course.2 }}</td>
-                        <td>{{ course.3 }}</td>
-                        <td>{{ course.4 }}</td> -->
                         <td>{{ course }}</td>
 
                     </tr>
@@ -133,6 +128,7 @@
             </tbody>
 
         </table>
+        
         <input type="submit" name="{{ forloop.counter }}" value="Save"/>
 {#         <button type="submit" name="counter" value="{{ forloop.counter }}" class="btn btn-primary">Save</button>#}
         </form>
