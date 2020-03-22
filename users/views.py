@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from .models import AdtaaUser
 from invitations.views import SendInvite
 from invitations.forms import InvitationAdminAddForm, InvitationAdminChangeForm, InviteForm
@@ -7,7 +8,7 @@ from .forms import AdtaaUserForm, AdtaaAuthenticationForm, AdtaaRootUserForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
@@ -115,8 +116,10 @@ class RootInviteDetail(LoginRequiredMixin, UpdateView):
     model = RootInvitation
     fields = '__all__'
     template_name = "users/root_invite_detail.html"
-    #slug_field = 'url'
-    #slug_url_kwarg = 'url'
+
+class RootInviteDelete(LoginRequiredMixin, DeleteView):
+    model = RootInvitation
+    success_url = reverse_lazy('rootinviteview')
 
 class UserListView(ListView):
     model = AdtaaUser

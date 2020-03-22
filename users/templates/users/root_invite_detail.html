@@ -1,4 +1,4 @@
-{% extends 'Adtaa/base.html' %}
+{% extends 'users/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
@@ -15,6 +15,7 @@
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Save</button>
+                <a class="btn btn-danger" href="{% url 'invite-delete' object.id %}">Delete</a>
             </div>
 
         </form>
