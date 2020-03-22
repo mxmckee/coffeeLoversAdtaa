@@ -48,10 +48,23 @@ def schedule(request):
         middleList=[]
         for j in range(len(autosolutions[i][0])):
             innerList=[autosolutions[i][0][j][0].courseNumber, autosolutions[i][0][j][0].courseTitle, autosolutions[i][0][j][0].courseDays, autosolutions[i][0][j][0].returnReadableTime(), autosolutions[i][0][j][1].lastName]
-            middleList.append(innerList)   
+            middleList.append(innerList)
         outerList.append((middleList, autosolutions[i][1]))
     autosolutions=outerList
     context = {'autosolutions': autosolutions}
+
+    # outerList=[]
+    # for i in range(len(autosolutions)):
+    #     middleList=[]
+    #     for j in range(len(autosolutions[i][0])):
+    #         innerList=[autosolutions[i][0][j][0].courseNumber, autosolutions[i][0][j][0].courseTitle, autosolutions[i][0][j][0].courseDays, autosolutions[i][0][j][0].returnReadableTime(), autosolutions[i][0][j][1].lastName]
+    #         middleList.append(innerList)
+    #     unassigned_list=[]
+    #     for course in autosolutions[i][1]:
+    #         unassigned_list.append([course.courseNumber, course.courseTitle, course.courseDays, course.returnReadableTime, 'Unassigned'])
+    #     outerList.append((middleList, unassigned_list))
+    # autosolutions=outerList
+    # context = {'autosolutions': autosolutions}
 
 
 

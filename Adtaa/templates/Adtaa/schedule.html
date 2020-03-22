@@ -110,6 +110,7 @@
             </tbody>
 
         </table>
+
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -117,10 +118,13 @@
                 </tr>
             </thead>
             <tbody>
-                {% for name in unassigned %}
+                {% for course in unassigned %}
                     <tr>
-                        <td>{{ name }}</td>
-
+                        <!-- <td>{{ course.1 }}</td>
+                        <td>{{ course.2 }}</td>
+                        <td>{{ course.3 }}</td>
+                        <td>{{ course.4 }}</td> -->
+                        <td>{{ course }}</td>
 
                     </tr>
 
