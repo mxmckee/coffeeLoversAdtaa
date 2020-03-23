@@ -53,14 +53,14 @@ def RootInvite(request):
     if request.method == 'POST':
         form=InvitationAdminAddForm(request.POST)
         if form.is_valid():
+            #email=form.save()
             email = form.cleaned_data.get("email")
-            params = {'email': email}
-            if form.cleaned_data.get("inviter"):
-                params['inviter'] = form.cleaned_data.get("inviter")
-            invite = RootInvitation.create(**params, inviter=request.user)
+            #params = {'email': email}
+            #if form.cleaned_data.get("inviter"):
+            #    params['inviter'] = form.cleaned_data.get("inviter")
+            invite = RootInvitation.create(email, inviter=request.user)
             invite.send_invitation(request)
-            #user=form.save(self, *args, **kwargs)
-            #user.save()
+            #email.save()
             messages.success(request, f'Invite sent!')
             return redirect('rootinviteview')
     else:
