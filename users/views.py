@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from .models import AdtaaUser
-from invitations.views import SendInvite
 from invitations.forms import InvitationAdminAddForm, InvitationAdminChangeForm, InviteForm
-from invitations.admin import InvitationAdmin
 from .forms import AdtaaUserForm, AdtaaAuthenticationForm, AdtaaRootUserForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
