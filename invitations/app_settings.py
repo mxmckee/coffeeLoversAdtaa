@@ -71,7 +71,7 @@ class AppSettings(object):
         """
         Subject-line prefix to use for email messages sent
         """
-        return self._setting("EMAIL_SUBJECT_PREFIX", None)
+        return self._setting("EMAIL_SUBJECT_PREFIX", "ADTAA ")
 
     @property
     def INVITATION_MODEL(self):

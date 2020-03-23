@@ -21,6 +21,8 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a class="btn btn-outline-secondary mt-3" href="{% url 'profile' %}" role="button">Back</a>
+    {#    <div class="btn-group">#}
+            <a class="btn btn-outline-secondary mt-3 pull-left" href="{% url 'profile' %}" role="button">Back</a>
+            <a class="btn btn-primary mt-3 pull-right" href="{% url 'rootinvite' %}" role="button">Add Invitation</a>
+    {#    </div>#}
 {% endblock content %}
