@@ -19,6 +19,7 @@ from users import views as user_views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -42,8 +43,16 @@ urlpatterns = [
     path('userlist/', user_views.UserListView.as_view(template_name='users/userlist.html'), name='userlist'),
     path('user/<int:pk>/', user_views.UserDetailView.as_view(template_name='users/AdtaaUser_detail.html'), name='user-detail'),
     path('user/<int:pk>/update/', user_views.UserUpdateView.as_view(template_name='users/user_form.html'), name='user-update'),
+    path('accept-invite/', user_views.root_register, name='account_signup'),
+    path('user/rootinvite/', user_views.RootInvite, name='rootinvite'),
+    path('user/rootinviteview/', user_views.RootInviteView.as_view(template_name='users/rootinvitelist.html'), name='rootinviteview'),
+    path('user/<int:pk>/rootinviteupdate', user_views.RootInviteDetail.as_view(template_name='users/root_invite_detail.html'), name='invite-detail'),
+    path('user/<int:pk>/rootinvitedelete', user_views.RootInviteDelete.as_view(template_name='users/root_invite_delete.html'), name='invite-delete'),
+
 
     path('', include('Adtaa.urls')),
+
+    url(r'^invitations/', include('invitations.urls', namespace='invitations')),
 
 ]
 

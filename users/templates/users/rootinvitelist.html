@@ -1,0 +1,28 @@
+{% extends 'Adtaa/base.html' %}
+{% block content %}
+    <h4 class="text-center">Root Invitations</h4>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Email</th>
+                <th scope="col">Sent</th>
+                <th scope="col">Accepted</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for email in emails %}
+                <tr>
+                    <td>{{ email.email }}</td>
+                    <td>{{ email.sent }}</td>
+                    <td>{{ email.accepted }}</td>
+                    <td><a class="btn btn-danger" href="{% url 'invite-delete' email.id %}" role="button">Delete</a></td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {#    <div class="btn-group">#}
+            <a class="btn btn-outline-secondary mt-3 pull-left" href="{% url 'profile' %}" role="button">Back</a>
+            <a class="btn btn-primary mt-3 pull-right" href="{% url 'rootinvite' %}" role="button">Add Invitation</a>
+    {#    </div>#}
+{% endblock content %}

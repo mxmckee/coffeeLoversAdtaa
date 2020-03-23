@@ -24,6 +24,20 @@ class AdtaaUserForm(UserCreationForm):
         elif username and AdtaaUser.objects.filter(username=username):
             raise forms.ValidationError('A user with this username already exists')
 
+class AdtaaRootUserForm(UserCreationForm):
+    #email = forms.EmailField()
+
+    class Meta:
+        model = AdtaaUser
+        fields = [
+            'username', 'password1', 'password2'
+        ]
+
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        if username and AdtaaUser.objects.filter(username=username):
+           raise forms.ValidationError('A user with this username already exists')
+
 class AdtaaAuthenticationForm(AuthenticationForm):
     error_messages = {
         'inactive': _('This account has not been activated yet.  You will receive an email when activated.'),
