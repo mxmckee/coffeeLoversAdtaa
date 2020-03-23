@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
 from .models import AdtaaUser
 from invitations.forms import InvitationAdminAddForm, InvitationAdminChangeForm, InviteForm
 from .forms import AdtaaUserForm, AdtaaAuthenticationForm, AdtaaRootUserForm
@@ -117,7 +116,7 @@ class RootInviteDetail(LoginRequiredMixin, UpdateView):
 
 class RootInviteDelete(LoginRequiredMixin, DeleteView):
     model = RootInvitation
-    success_url = reverse_lazy('rootinviteview')
+    success_url = '/user/rootinviteview/'
 
 class UserListView(ListView):
     model = AdtaaUser
