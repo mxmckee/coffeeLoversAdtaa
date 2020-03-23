@@ -6,15 +6,11 @@
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Invite Root User</legend>
-                <!--<input type="email" name="email" placeholder="email"><br>
-                <input type="text" name="username" placeholder="username"><br>
-                <input type="password" name="password1" placeholder="Password"><br>
-                <input type="password" name="password2" placeholder="Confirm Password"><br>
- -->
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Save</button>
+                <a class="btn btn-outline-secondary mt-3 pull-left" href="{% url 'rootinviteview' %}" role="button">Back</a>
+                <button class="btn btn-primary mt-3 pull-right" type="submit">Send</button>
             </div>
 
         </form>

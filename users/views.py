@@ -1,18 +1,21 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from .models import AdtaaUser
 from invitations.views import SendInvite
 from invitations.forms import InvitationAdminAddForm, InvitationAdminChangeForm, InviteForm
+from invitations.admin import InvitationAdmin
 from .forms import AdtaaUserForm, AdtaaAuthenticationForm, AdtaaRootUserForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
-from invitations.utils import get_invitation_model
+from invitations.utils import get_invitation_model, get_invitation_admin_change_form
 
 RootInvitation = get_invitation_model()
+InvitationAdminChangeForm = get_invitation_admin_change_form()
 
 def register(request):
     if request.method == 'POST':
@@ -50,16 +53,16 @@ def RootInvite(request):
     if request.method == 'POST':
         form=InvitationAdminAddForm(request.POST)
         if form.is_valid():
+            #email=form.save()
             email = form.cleaned_data.get("email")
-            params = {'email': email}
-            if form.cleaned_data.get("inviter"):
-                params['inviter'] = form.cleaned_data.get("inviter")
-            invite = RootInvitation.create(**params, inviter=request.user)
+            #params = {'email': email}
+            #if form.cleaned_data.get("inviter"):
+            #    params['inviter'] = form.cleaned_data.get("inviter")
+            invite = RootInvitation.create(email, inviter=request.user)
             invite.send_invitation(request)
-            #user=form.save(self, *args, **kwargs)
-            #user.save()
+            #email.save()
             messages.success(request, f'Invite sent!')
-            return redirect('rootinvite')
+            return redirect('rootinviteview')
     else:
         form = InvitationAdminAddForm()
 
@@ -69,14 +72,14 @@ def RootInviteChange(request):
     if request.method == 'POST':
         form=InvitationAdminChangeForm(request.POST)
         if form.is_valid():
-            #user=form.save()
-            #user.save()
+            user=form.save()
+            user.save()
             #messages.success(request, f'Invite sent!')
-            return redirect('profile')
+            return redirect('rootinviteview')
     else:
         form = InvitationAdminChangeForm()
 
-    return render(request, 'users/profile.html', {'form':form})
+    return render(request, 'users/root_invite_detail.html', {'form':form})
 
 def change_password(request):
     if request.method == 'POST':
@@ -103,6 +106,20 @@ class AdtaaLoginView(LoginView):
 
 #class RootInvite(SendInvite):
 #    model = AdtaaUser
+
+class RootInviteView(ListView):
+    model = RootInvitation
+    context_object_name = 'emails'
+    ordering = ['-created']
+
+class RootInviteDetail(LoginRequiredMixin, UpdateView):
+    model = RootInvitation
+    fields = '__all__'
+    template_name = "users/root_invite_detail.html"
+
+class RootInviteDelete(LoginRequiredMixin, DeleteView):
+    model = RootInvitation
+    success_url = reverse_lazy('rootinviteview')
 
 class UserListView(ListView):
     model = AdtaaUser

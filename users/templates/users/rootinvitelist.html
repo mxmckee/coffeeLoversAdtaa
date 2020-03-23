@@ -1,23 +1,28 @@
 {% extends 'Adtaa/base.html' %}
-{% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Invitations</legend>
-                <!--<input type="email" name="email" placeholder="email"><br>
-                <input type="text" name="username" placeholder="username"><br>
-                <input type="password" name="password1" placeholder="Password"><br>
-                <input type="password" name="password2" placeholder="Confirm Password"><br>
- -->
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Save</button>
-            </div>
-
-        </form>
-
-    </div>
+    <h4 class="text-center">Root Invitations</h4>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Email</th>
+                <th scope="col">Sent</th>
+                <th scope="col">Accepted</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for email in emails %}
+                <tr>
+                    <td>{{ email.email }}</td>
+                    <td>{{ email.sent }}</td>
+                    <td>{{ email.accepted }}</td>
+                    <td><a class="btn btn-danger" href="{% url 'invite-delete' email.id %}" role="button">Delete</a></td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {#    <div class="btn-group">#}
+            <a class="btn btn-outline-secondary mt-3 pull-left" href="{% url 'profile' %}" role="button">Back</a>
+            <a class="btn btn-primary mt-3 pull-right" href="{% url 'rootinvite' %}" role="button">Add Invitation</a>
+    {#    </div>#}
 {% endblock content %}
