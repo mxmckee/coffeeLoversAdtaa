@@ -37,19 +37,22 @@ def schedule(request):
     autosolutions = coffeeFx.main()
 
     for i in range(len(autosolutions)):
-        for j in range(len(autosolutions[i][0])):
-            tempCourse = ScheduledCourse(courseNumber=autosolutions[i][0][j][0].courseNumber, courseTitle=autosolutions[i][0][j][0].courseTitle, \
-                                         courseDays=autosolutions[i][0][j][0].courseDays, courseTime=autosolutions[i][0][j][0].courseTime, \
-                                         instructor=autosolutions[i][0][j][1], scheduleNumber=i+1)
+        for j in range(len(autosolutions[i])):
+            tempCourse = ScheduledCourse(courseNumber=autosolutions[i][j][0].courseNumber, courseTitle=autosolutions[i][j][0].courseTitle, \
+                                         courseDays=autosolutions[i][j][0].courseDays, courseTime=autosolutions[i][j][0].courseTime, \
+                                         instructor=autosolutions[i][j][1], scheduleNumber=i+1)
             tempCourse.save()
 
     outerList=[]
     for i in range(len(autosolutions)):
         middleList=[]
-        for j in range(len(autosolutions[i][0])):
-            innerList=[autosolutions[i][0][j][0].courseNumber, autosolutions[i][0][j][0].courseTitle, autosolutions[i][0][j][0].courseDays, autosolutions[i][0][j][0].returnReadableTime(), autosolutions[i][0][j][1].lastName]
+        for j in range(len(autosolutions[i])):
+            if autosolutions[i][j][1] is not None:
+                innerList=[autosolutions[i][j][0].courseNumber, autosolutions[i][j][0].courseTitle, autosolutions[i][j][0].courseDays, autosolutions[i][j][0].returnReadableTime(), autosolutions[i][j][1].lastName]
+            else:
+                innerList=[autosolutions[i][j][0].courseNumber, autosolutions[i][j][0].courseTitle, autosolutions[i][j][0].courseDays, autosolutions[i][j][0].returnReadableTime(), "None"]
             middleList.append(innerList)
-        outerList.append((middleList, autosolutions[i][1]))
+        outerList.append(middleList)
     autosolutions=outerList
     context = {'autosolutions': autosolutions}
 

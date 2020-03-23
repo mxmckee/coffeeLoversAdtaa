@@ -31,9 +31,9 @@ def get_course_schedule(days, times, courses):
 
 
 def get_valid_instructor_combinations(instructors, scheduled_courses):
-    temp_scheduled_courses = scheduled_courses.copy()
+    ordered_courses = scheduled_courses.copy()
     master_list = []
-    for course in temp_scheduled_courses:
+    for course in ordered_courses:
         sub_list = []
         for instructor in instructors:
             if compare_two_objects(course, instructor):
@@ -68,7 +68,7 @@ def get_valid_instructor_combinations(instructors, scheduled_courses):
 
     instructor_combinations = [x for x in master_list if x not in invalid_instructor_combinations]
 
-    return instructor_combinations
+    return instructor_combinations, ordered_courses
 
 
 def compare_two_objects(course, instructor):
@@ -102,7 +102,7 @@ def remove_duplicates(list1):
     return duplicates_removed
 
 
-def get_auto_solutions(instructor_combinations, courses, scheduled_courses):
+def get_auto_solutions(instructor_combinations, courses, scheduled_courses, ordered_courses):
     instructor_combinations = remove_duplicates(instructor_combinations)
 
     list_of_nones = [None] * len(courses)
@@ -153,13 +153,25 @@ def get_auto_solutions(instructor_combinations, courses, scheduled_courses):
         if len(solution) == max_schedule_length:
             auto_solutions_of_max_length.append(solution)
 
-    auto_solutions = []
+    temp_auto_solutions = []
     for solution in auto_solutions_of_max_length:
         assigned_courses = []
         for assignment in solution:
             assigned_courses.append(assignment[0])
         unassigned_courses = [x for x in courses if x not in assigned_courses]
-        auto_solutions.append((solution, unassigned_courses))
+        for course in unassigned_courses:
+            solution.append((course, None))
+        temp_auto_solutions.append(solution)
+        
+    auto_solutions = []
+    for assignment_list in temp_auto_solutions:
+        correctly_ordered_assignments = []
+        for course in ordered_courses:
+            for assignment_tuple in assignment_list:
+                if assignment_tuple[0] == course:
+                    correctly_ordered_assignments.append(assignment_tuple)
+                    break
+        auto_solutions.append(correctly_ordered_assignments)
 
     return auto_solutions
 
@@ -167,7 +179,7 @@ def get_auto_solutions(instructor_combinations, courses, scheduled_courses):
 def main():
     days, times, courses, instructors = get_schedule_criteria()
     scheduled_courses = get_course_schedule(days, times, courses)
-    instructor_combinations = get_valid_instructor_combinations(instructors, scheduled_courses)
-    auto_solutions = get_auto_solutions(instructor_combinations, courses, scheduled_courses)
+    instructor_combinations, ordered_courses = get_valid_instructor_combinations(instructors, scheduled_courses)
+    auto_solutions = get_auto_solutions(instructor_combinations, courses, scheduled_courses, ordered_courses)
 
     return auto_solutions
