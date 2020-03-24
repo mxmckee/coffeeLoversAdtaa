@@ -44,10 +44,13 @@ def schedule(request):
             tempCourse.save()
 
     outerList=[]
-    for solution in autosolutions:
+    for i in range(len(autosolutions)):
         middleList=[]
-        for course in solution:
-            innerList=[course[0].courseNumber, course[0].courseTitle, course[0].courseDays, course[0].returnReadableTime(), course[1].lastName]
+        for j in range(len(autosolutions[i])):
+            if autosolutions[i][j][1] is not None:
+                innerList=[autosolutions[i][j][0].courseNumber, autosolutions[i][j][0].courseTitle, autosolutions[i][j][0].courseDays, autosolutions[i][j][0].returnReadableTime(), autosolutions[i][j][1].lastName]
+            else:
+                innerList=[autosolutions[i][j][0].courseNumber, autosolutions[i][j][0].courseTitle, autosolutions[i][j][0].courseDays, autosolutions[i][j][0].returnReadableTime(), "None"]
             middleList.append(innerList)
         outerList.append(middleList)
     autosolutions=outerList

@@ -110,6 +110,25 @@
             </tbody>
 
         </table>
+        
+        <!-- <table class="table table-hover">
+            <tbody>
+                <tr>
+                    <th scope="col">Unassigned Courses (if applicable)</th>
+                </tr>
+                
+                {% for course in unassigned %}
+                    <tr>
+                        <td>{{ course }}</td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table> -->
+        
         <input type="submit" name="{{ forloop.counter }}" value="Save"/>
 {#         <button type="submit" name="counter" value="{{ forloop.counter }}" class="btn btn-primary">Save</button>#}
         </form>
