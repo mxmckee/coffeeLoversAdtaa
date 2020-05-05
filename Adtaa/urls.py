@@ -1,5 +1,6 @@
 from django.urls import path, include
 from Adtaa import views as Adtaa_views
+from users import views as users_views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -21,4 +22,5 @@ urlpatterns = [
     path('instructor/<int:pk>/update', Adtaa_views.InstructorUpdateView.as_view(template_name='Adtaa/instructor_update_form.html'), name='instructor-update'),
     path('instructor/<int:pk>/delete', Adtaa_views.InstructorDeleteView.as_view(template_name='Adtaa/instructor_confirm_delete.html'), name='instructor-delete'),
     path('schedule/', Adtaa_views.schedule, name='schedule'),
+    path('userslist/', users_views.UserListView.as_view(template_name='users/users_list.html'), name='userslist'),
 ]
