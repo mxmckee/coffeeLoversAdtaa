@@ -129,3 +129,7 @@ class UserDetailView(DetailView):
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = AdtaaUser
     fields = ['is_active', 'is_staff', 'is_superuser']
+
+class UserDeleteView(LoginRequiredMixin, DeleteView):
+    model = AdtaaUser
+    success_url = '/userslist'

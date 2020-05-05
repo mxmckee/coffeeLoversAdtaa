@@ -23,4 +23,5 @@ urlpatterns = [
     path('instructor/<int:pk>/delete', Adtaa_views.InstructorDeleteView.as_view(template_name='Adtaa/instructor_confirm_delete.html'), name='instructor-delete'),
     path('schedule/', Adtaa_views.schedule, name='schedule'),
     path('userslist/', users_views.UserListView.as_view(template_name='users/users_list.html'), name='userslist'),
+    path('user/<int:pk>/delete', users_views.UserDeleteView.as_view(template_name='users/user_confirm_delete.html'), name='user-delete'),
 ]
